@@ -7,7 +7,6 @@ Renderer::Renderer(Scene* scene): scene(scene), lightPos(700.0f, 200.0f, 850.0f)
     shadowMap.resize(scene->width(), std::vector<double>(scene->height(), std::numeric_limits<double>::infinity()));
     image = QImage(scene->width(), scene->height(), QImage::Format_RGB32);
     image.fill(background);
-    //rotationAngle = 0;
     setTransformMatrices();
 }
 

@@ -39,8 +39,6 @@ TetrisEngine::~TetrisEngine() {
     delete renderTimer;
     delete dropTimer;
     delete fpsTimer;
-
-    qDebug() << "TetrisEngine destroyed.";
 }
 
 void TetrisEngine::setUp(const Settings& settings) {
@@ -156,8 +154,6 @@ void TetrisEngine::newGame() {
 
 // Основной метод обновления
 void TetrisEngine::updateScene() {
-//    qDebug() << (activeBlock.get())->getCenter();
-//    qDebug() << activeBlockProjection.get()->getCenter();
     renderer->renderScene(field, *activeBlock.get(), *activeBlockProjection.get());
     fps++;
 }
@@ -199,14 +195,13 @@ void TetrisEngine::dropActiveBlock() {
 }
 
 void TetrisEngine::updateFPS() {
-    qDebug() << "fps" << fps;
+    //qDebug() << "fps" << fps;
     fps = 0;
 }
 
 
 // Перемещение активного блока
 void TetrisEngine::moveActiveBlock(int dx, int dy, int dz) {
-    qDebug() << "move";
     float cellSize = field.getCellSize();
     if (dz < 0) {
         dz = 0;
@@ -226,7 +221,6 @@ void TetrisEngine::moveActiveBlock(int dx, int dy, int dz) {
 void TetrisEngine::rotateActiveBlock(const QVector3D& axis, bool clockwise) {
     // Убедимся, что вращение возможно
     if (!canRotateBlock(axis, clockwise)) {
-        qDebug() << axis << clockwise;
         return;
     }
 
@@ -514,61 +508,3 @@ void TetrisEngine::saveBestScoreToFile(const std::string& filename) {
         file.close();
     }
 }
-
-void TetrisEngine::measureRenderTimeCubes(int numCubesStart, int numCubesEnd, int step) {
-    qDebug() << "Starting render time measurement (cubes)...";
-    int nTests = 20;
-
-    for (int numCubes = numCubesStart; numCubes <= numCubesEnd; numCubes += step) {
-        long long duration = 0;
-        for (int i = 0; i < nTests; i++) {
-            auto cubes = generateTestCubes(numCubes, 50, 10, 5);
-            auto start = std::chrono::high_resolution_clock::now();
-            renderer->renderCubes(cubes);
-            auto end = std::chrono::high_resolution_clock::now();
-
-            duration += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-        }
-
-        qDebug() << "Number of cubes:" << numCubes << "Render time (ms):" << duration / nTests;
-    }
-}
-
-std::vector<Cube> TetrisEngine::generateTestCubes(int numCubes, float edge, float rounding, int approx) {
-    QColor testColor = QColor(255, 0, 0);
-
-    std::vector<Cube> cubes;
-
-    for (int i = 0; i < numCubes; ++i) {
-        int x = i % field.getWidth();
-        int y = (i / field.getWidth()) % field.getDepth();
-        int z = (i / (field.getWidth() * field.getDepth())) % field.getHeight();
-
-        QVector3D position(x * edge, y * edge, z * edge);
-        auto cube = Cube(position, edge, rounding, testColor);
-        cube.generateMesh(approx);
-        cubes.push_back(cube);
-    }
-
-    return cubes;
-}
-
-void TetrisEngine::measureRenderTimeEdges(int numEdgesStart, int numEdgesEnd, int step) {
-    qDebug() << "Starting render time measurement (edges)...";
-    int nTests = 20;
-
-    for (int numEdges = numEdgesStart; numEdges <= numEdgesEnd; numEdges += step) {
-        long long duration;
-        for (int i = 0; i < nTests; i++) {
-            auto cubes = generateTestCubes(100, 50, 10, numEdges);
-            auto start = std::chrono::high_resolution_clock::now();
-            renderer->renderCubes(cubes);
-            auto end = std::chrono::high_resolution_clock::now();
-
-            duration += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-        }
-
-        qDebug() << "Number of edges:" << numEdges << "Render time (ms):" << duration / nTests;
-    }
-}
-

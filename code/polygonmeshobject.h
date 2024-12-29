@@ -7,7 +7,6 @@
 #include <vector>
 #include <QtMath>
 #include <iostream>
-#include <QDebug>
 #include "consts.h"
 
 class PolygonMeshObject

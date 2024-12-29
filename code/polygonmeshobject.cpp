@@ -21,10 +21,8 @@ void PolygonMeshObject::computeNormals() {
         }
     }
 
-    //qDebug() << "len = " << vertexNormals.size();
     for (auto& normal : vertexNormals) {
         normal.normalize();
-        //qDebug() << "vertex =" << vertices[i] << "vertex normal = " << normal;
     }
 }
 
@@ -35,5 +33,4 @@ PolygonMeshObject::PolygonMeshObject(const PolygonMeshObject& other)
       vertices(other.vertices),
       polygons(other.polygons),
       vertexNormals(other.vertexNormals) {
-    // Все члены копируются глубоко, так как стандартные контейнеры и объекты поддерживают глубокое копирование.
 }

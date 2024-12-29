@@ -7,7 +7,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsSceneWheelEvent>
 #include <QTransform>
-#include <QDebug>
 
 class Scene : public QGraphicsScene
 {
@@ -29,10 +28,10 @@ protected:
 
     // void wheelEvent(QGraphicsSceneWheelEvent* event) override;
 private:
-    bool isDragging;       // Флаг, указывающий на то, что происходит перетаскивание
-    QPointF lastMousePos;  // Последняя позиция мыши
-    double lastAngleX;     // Угол вращения вокруг оси X
-    double lastAngleY;     // Угол вращения вокруг оси Y
+    bool isDragging;       
+    QPointF lastMousePos;  
+    double lastAngleX;     
+    double lastAngleY;     
 };
 
 #endif // SCENE_H

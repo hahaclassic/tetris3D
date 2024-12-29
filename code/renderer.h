@@ -25,8 +25,6 @@
 
 class Renderer {
 private:
-    // float rotationAngle;
-    // float scaleRatio;
     QMatrix4x4 lightProjectionViewMatrix;
     QMatrix4x4 cameraProjectionViewMatrix;
     QMatrix4x4 modelMatrix;
@@ -36,7 +34,6 @@ private:
     std::vector<std::vector<double>> buffer;
     std::vector<std::vector<double>> shadowMap;
     std::vector<std::vector<std::pair<QColor, float>>> transparencyBuffer;
-//  std::vector<PolygonMeshObject&> transparentObjects;
 
     QColor background;
     QVector3D lightPos;

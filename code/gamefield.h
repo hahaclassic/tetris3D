@@ -5,7 +5,7 @@
 #include "cube.h"
 #include "gamefieldside.h"
 #include <vector>
-#include <memory> // Для использования умных указателей
+#include <memory> 
 #include <algorithm>
 
 class GameField {
@@ -14,8 +14,7 @@ private:
     QVector3D position;
     int width, height, depth;                                     // Размеры игрового пространства (в ячейках)
     float cellSize;                                               // Размер ячейки (длина ребра куба)
-    float transparency;                                           // Прозрачность стенок
-    std::vector<std::vector<std::vector<std::shared_ptr<Cube>>>> field; // 3D-матрица кубов
+    std::vector<std::vector<std::vector<std::shared_ptr<Cube>>>> field; 
     std::vector<GameFieldSide> sides;
 
 

@@ -14,10 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
-//    ui->graphicsView->setFocusPolicy(Qt::NoFocus);
-//    ui->centralwidget->setFocusPolicy(Qt::NoFocus);
-//    setFocusPolicy(Qt::StrongFocus);
-//    setFocus();
 
     std::shared_ptr<Renderer> renderer = std::make_shared<Renderer>(scene);
     engine = new TetrisEngine(renderer, scene);
@@ -61,9 +57,9 @@ void MainWindow::newGame() {
 void MainWindow::newGameAfterGameOver() {
     ui->startStopBtn->setText("Start");
     gameOver = true;
-    QString msg = "Игра окончена! Ваш счёт: " + ui->currentScore->text();
+    QString msg = "Game over! Your score: " + ui->currentScore->text();
     if (ui->currentScore->text() == ui->bestScore->text())
-        msg += "\nНовый рекорд!";
+        msg += "\nNew record!";
     showMessage(QMessageBox::Information, "Game over", msg);
 }
 
@@ -108,8 +104,8 @@ void MainWindow::updateSettings() {
     if (!gameOver && (settings.fieldDepth != newSettings.fieldDepth ||
             settings.fieldHeight != newSettings.fieldHeight ||
             settings.fieldWidth != newSettings.fieldWidth)) {
-        int answer = showMessage(QMessageBox::Warning, "Внимание!",
-            "При изменении размеров игрового поля текущий прогресс сбросится. Продолжить?");
+        int answer = showMessage(QMessageBox::Warning, "Attention!",
+            "When changing the size of the playing field, the current progress will be reset. Continue?");
         if (answer == QMessageBox::Ok) {
             gameOver = false;
             ui->startStopBtn->setText("Start");

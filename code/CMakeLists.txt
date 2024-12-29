@@ -28,6 +28,11 @@ set(PROJECT_SOURCES
 	gamefieldside.h gamefieldside.cpp
 )
 
+set(CMAKE_C_FLAGS_RELEASE "-Os -s -ffunction-sections -fdata-sections")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os -s -ffunction-sections -fdata-sections")
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-Wl,--gc-sections")
+set(CMAKE_BUILD_TYPE MinSizeRel)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(tetris3D
         MANUAL_FINALIZATION

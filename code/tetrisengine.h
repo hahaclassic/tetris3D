@@ -48,11 +48,9 @@ public:
 signals:
     void currentScoreUpdateEvent(int score);
     void bestScoreUpdateEvent(int score);
-    // void stopEvent();
     void gameOverEvent();
 
 private slots:
-    // Основной метод обновления
     void updateScene();
     void dropActiveBlock();
     void updateFPS();
@@ -62,21 +60,21 @@ private slots:
 private:
     int currentScore, bestScore;
 
-    GameField field;          // Игровое пространство
-    std::shared_ptr<Block> activeBlock;        // Текущий активный блок
-    std::shared_ptr<Block> activeBlockProjection; // Текущий активный блок
-    std::shared_ptr<Renderer> renderer;        // Рендерер сцены
+    GameField field;          
+    std::shared_ptr<Block> activeBlock;       
+    std::shared_ptr<Block> activeBlockProjection; 
+    std::shared_ptr<Renderer> renderer;       
 
     Cube baseCube;
     float projTransparency;
 
     float dropSpeed;
     float renderSpeed;
-    bool isRunning, gameOver; // Флаг работы игрового цикла
+    bool isRunning, gameOver; 
     int fps;
 
-    QTimer* renderTimer;     // Таймер для рендеринга
-    QTimer* dropTimer;       // Таймер для падения блока
+    QTimer* renderTimer;    
+    QTimer* dropTimer;     
     QTimer* fpsTimer;
 
     // setup
@@ -87,7 +85,7 @@ private:
     // block
     bool canMoveBlock(const QVector3D& offset) const;
     bool canRotateBlock(const QVector3D& axis, bool clockwise) const;
-    bool placeActiveBlock();                   // Поставить блок
+    bool placeActiveBlock();                   
 
     bool generateNewBlock();
     void generateRandomBlock(QVector3D centerPosition);
@@ -96,15 +94,8 @@ private:
     void rotateActiveBlock(const QVector3D& axis, bool clockwise);
     void updateProjectionPosition();
 
-    // best score loading
     int loadBestScoreFromFile(const std::string& filename);
     void saveBestScoreToFile(const std::string& filename);
-
-    void measureRenderTimeCubes(int numCubesStart, int numCubesEnd, int step);
-
-    std::vector<Cube> generateTestCubes(int numCubes, float edge, float rounding, int approx);
-
-    void measureRenderTimeEdges(int numEdgesStart, int numEdgesEnd, int step);
 };
 
 #endif // TETRISENGINE_H
