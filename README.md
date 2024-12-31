@@ -30,7 +30,7 @@ or move the light source up...
 ### Graphics
 
 You can configure
-* number of approaching edges
+* number of approximating edges
 * radius of rounding for cubes
 * the size of the playing field
 * location of the light source
